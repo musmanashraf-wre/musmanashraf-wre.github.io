@@ -40,8 +40,14 @@
     position: fixed; top: 0; width: 100%; z-index: 100;
     padding: 18px 60px;
     display: flex; justify-content: space-between; align-items: center;
+    background: transparent;
+    transition: all 0.4s;
+    border-bottom: 1px solid transparent;
+  }
+  nav.scrolled {
     background: rgba(11,30,61,0.96);
     backdrop-filter: blur(12px);
+    padding: 14px 60px;
     border-bottom: 1px solid rgba(200,169,110,0.2);
   }
   .nav-logo {
@@ -49,7 +55,10 @@
     font-size: 1.4rem; font-weight: 400; color: var(--gold);
     letter-spacing: 0.05em;
     text-decoration: none;
+    opacity: 0; transform: translateX(-20px); transition: all 0.6s 0.2s;
   }
+  .nav-scrolled .nav-logo { opacity: 1; transform: translateX(0); }
+
   .nav-links { display: flex; gap: 36px; list-style: none; }
   .nav-links a {
     font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
@@ -58,31 +67,6 @@
     font-weight: 500;
   }
   .nav-links a:hover { color: var(--gold); }
-
-  /* ── PORTFOLIO GRID STYLES ── */
-  #portfolio { background: var(--white); padding: 100px 60px; }
-  .portfolio-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: 30px;
-    margin-top: 50px;
-  }
-  .portfolio-item {
-    position: relative;
-    border-radius: 12px;
-    overflow: hidden;
-    aspect-ratio: 4/3;
-    background: var(--navy);
-    transition: transform 0.4s ease;
-  }
-  .portfolio-item:hover { transform: translateY(-10px); }
-  .portfolio-item img { width: 100%; height: 100%; object-fit: cover; }
-  .portfolio-overlay-text {
-    position: absolute; inset: 0; display: flex; flex-direction: column;
-    justify-content: center; align-items: center; background: rgba(11, 30, 61, 0.8);
-    opacity: 0; transition: opacity 0.3s ease; text-align: center; color: var(--white); padding: 20px;
-  }
-  .portfolio-item:hover .portfolio-overlay-text { opacity: 1; }
 
   /* ── HERO ── */
   .hero {
@@ -102,6 +86,7 @@
     position: absolute; bottom: 0; left: 0; width: 100%; overflow: hidden; line-height: 0;
   }
   .hero-waves svg { display: block; width: 100%; height: 80px; }
+
   .hero-content {
     display: grid; grid-template-columns: 1fr 420px;
     gap: 80px; align-items: center;
@@ -123,6 +108,7 @@
     color: var(--white); margin-bottom: 10px;
   }
   h1 em { font-style: italic; color: var(--gold); }
+
   .hero-title-line2 {
     font-family: 'Cormorant Garamond', serif;
     font-size: clamp(1.4rem, 2.5vw, 2rem);
@@ -155,6 +141,7 @@
     transition: all 0.3s; font-family: 'Outfit', sans-serif;
   }
   .btn-primary:hover { background: var(--teal-light); transform: translateY(-2px); }
+
   .btn-outline {
     padding: 15px 36px;
     background: transparent; color: var(--cream);
@@ -198,6 +185,7 @@
     font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
     color: rgba(245,242,236,0.55); margin-top: 4px;
   }
+
   .hero-stat-card2 {
     position: absolute; top: 30px; right: -25px;
     background: var(--teal);
@@ -216,6 +204,7 @@
   /* ── SECTION SHARED ── */
   section { padding: 100px 60px; }
   .container { max-width: 1200px; margin: 0 auto; }
+
   .section-label {
     font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase;
     color: var(--teal); font-weight: 600; margin-bottom: 14px;
@@ -569,6 +558,7 @@
     font-size: 0.85rem; color: rgba(245,242,236,0.7);
     word-break: break-all;
   }
+
   .footer-credit {
     font-size: 0.75rem; color: rgba(245,242,236,0.25);
     letter-spacing: 0.1em; margin-top: 60px;
@@ -616,18 +606,16 @@
   /* ── MOBILE ── */
   @media (max-width: 900px) {
     nav { padding: 18px 24px; }
+    nav.scrolled { padding: 14px 24px; }
     .nav-links { display: none; }
     section { padding: 70px 24px; }
     .hero { padding: 100px 24px 60px; }
     .hero-content { grid-template-columns: 1fr; gap: 50px; }
     .hero-image-wrap { order: -1; max-width: 320px; margin: 0 auto; }
     .hero-stat-card { bottom: -15px; left: -10px; }
-    .hero-stat-card2 { top: 20px; right: -10px; }
     .about-grid { grid-template-columns: 1fr; }
     .about-image { max-width: 340px; margin: 0 auto; }
     .skills-grid { grid-template-columns: 1fr; }
-    .portfolio-content { padding: 0 24px; }
-    .portfolio-stats { gap: 30px; flex-wrap: wrap; }
     .edu-grid { grid-template-columns: 1fr; }
     .cert-grid { grid-template-columns: 1fr 1fr; }
     .contact-grid { grid-template-columns: 1fr 1fr; }
@@ -637,18 +625,15 @@
   @media (max-width: 600px) {
     .cert-grid { grid-template-columns: 1fr; }
     .contact-grid { grid-template-columns: 1fr; }
-    .portfolio-stats { gap: 20px; }
-    .hero-badges { gap: 8px; }
   }
 </style>
 </head>
 <body>
 
-<nav>
-  <a class="nav-logo" href="#home">Muhammad Usman Ashraf</a>
+<nav id="navbar">
+  <a class="nav-logo" href="#">M. Usman Ashraf</a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
-    <li><a href="#portfolio">Portfolio</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#education">Education</a></li>
@@ -664,7 +649,7 @@
       <h1 class="fade-up delay-1">Muhammad<em>Usman</em>Ashraf</h1>
       <div class="hero-title-line2 fade-up delay-2">MSc Eng. &nbsp;·&nbsp; 8+ Years Experience</div>
       <p class="hero-desc fade-up delay-2">
-        Results driven Water Resources Engineer with a strong background in hydrologic modeling, floodplain management, stormwater infrastructure, and high efficiency irrigation systems, now based in Baltimore, Maryland.
+        Results-driven Water Resources Engineer with a strong background in hydrologic modeling, floodplain management, stormwater infrastructure, and high-efficiency irrigation systems, now based in Baltimore, Maryland.
       </p>
       <div class="hero-badges fade-up delay-3">
         <span class="badge">Pakistan Engineering Council</span>
@@ -689,6 +674,12 @@
         <div class="label">Water Resources</div>
       </div>
     </div>
+  </div>
+  
+  <div class="hero-waves">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" preserveAspectRatio="none">
+      <path fill="#f5f2ec" fill-opacity="1" d="M0,160L48,176C96,192,192,224,288,213.3C384,203,480,149,576,149.3C672,149,768,203,864,224C960,245,1056,235,1152,202.7C1248,171,1344,117,1392,90.7L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+    </svg>
   </div>
 </section>
 
@@ -767,6 +758,39 @@
           <span class="skill-tag">Pumping Stations</span>
         </div>
       </div>
+
+      <div class="skill-card">
+        <div class="skill-card-icon">🧠</div>
+        <h3>Emerging Tech</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">GeoAI</span>
+          <span class="skill-tag">Python (Basic)</span>
+          <span class="skill-tag">Real-time Sensors</span>
+          <span class="skill-tag">Remote Data Loggers</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-card-icon">🚜</div>
+        <h3>Precision Agriculture</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Drip Irrigation</span>
+          <span class="skill-tag">Sprinkler Systems</span>
+          <span class="skill-tag">Crop Water Requirement</span>
+          <span class="skill-tag">Soil Moisture Control</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-card-icon">📋</div>
+        <h3>Project Management</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Technical Reports</span>
+          <span class="skill-tag">Budgeting</span>
+          <span class="skill-tag">Site Supervision</span>
+          <span class="skill-tag">Safety Protocols</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -804,41 +828,58 @@
           <li>Provided technical training to stakeholders on modern water management techniques.</li>
         </ul>
       </div>
+
+      <div class="timeline-item">
+        <div class="timeline-meta">
+          <span class="timeline-year">2015 — 2016</span>
+          <span class="timeline-company">Siddiqui &amp; Co. (Consultants)</span>
+        </div>
+        <h3 class="timeline-role">Junior Design Engineer</h3>
+        <p class="timeline-desc">Supported the design phase for several water infrastructure projects in Punjab.</p>
+        <ul class="timeline-bullets">
+          <li>Performed CAD drafting for small-scale irrigation channels and control structures.</li>
+          <li>Assisted senior engineers in collecting and analyzing field data for hydrologic reports.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="pub-card">
+      <div class="pub-icon">📄</div>
+      <div class="pub-content">
+        <h3>Design and Field Performance Evaluation of High-Efficiency Irrigation Systems</h3>
+        <p>A comprehensive study on optimizing agricultural water delivery in semi-arid regions. Focuses on the integration of pressure sensors and real-time data to minimize losses.</p>
+        <a href="#" class="pub-link">View Abstract</a>
+      </div>
     </div>
   </div>
 </section>
 
-<section id="portfolio">
+<section id="portfolio-banner">
+  <div class="portfolio-bg"></div>
+  <div class="portfolio-image-strip">
+    <img src="https://via.placeholder.com/1200x600" alt="Irrigation Project">
+  </div>
+  <div class="portfolio-overlay"></div>
   <div class="container">
-    <div class="section-label">Selected Projects</div>
-    <h2>Professional <em>Portfolio</em></h2>
-    
-    <div class="portfolio-grid">
+    <div class="portfolio-content">
+      <div class="section-label">Project Highlights</div>
+      <h2>Engineered <em>Excellence</em></h2>
+      <p>Over the years, I've delivered irrigation and water management projects totaling millions in investment. Each project represents a commitment to sustainability and engineering precision.</p>
       
-      <div class="portfolio-item">
-        <img src="https://via.placeholder.com/400x300" alt="Hydrologic Modeling">
-        <div class="portfolio-overlay-text">
-          <h3>Hydrologic Modeling</h3>
-          <p>Flood risk assessment and watershed delineation using HEC-RAS and GIS tools.</p>
+      <div class="portfolio-stats">
+        <div class="p-stat">
+          <div class="n">15+</div>
+          <div class="l">Major Projects</div>
+        </div>
+        <div class="p-stat">
+          <div class="n">500+</div>
+          <div class="l">Acres Optimized</div>
+        </div>
+        <div class="p-stat">
+          <div class="n">100%</div>
+          <div class="l">Compliance</div>
         </div>
       </div>
-
-      <div class="portfolio-item">
-        <img src="https://via.placeholder.com/400x300" alt="Irrigation Design">
-        <div class="portfolio-overlay-text">
-          <h3>Irrigation Design</h3>
-          <p>Large-scale precision irrigation networks for urban landscapes and agriculture.</p>
-        </div>
-      </div>
-
-      <div class="portfolio-item">
-        <img src="https://via.placeholder.com/400x300" alt="Stormwater Management">
-        <div class="portfolio-overlay-text">
-          <h3>Stormwater Management</h3>
-          <p>Design of drainage systems and sustainable infrastructure (LID/BMP) for water runoff.</p>
-        </div>
-      </div>
-
     </div>
   </div>
 </section>
@@ -853,6 +894,7 @@
         <div class="edu-school">University of Engineering and Technology, Lahore</div>
         <div class="edu-degree">Master of Science in Water Resources Engineering</div>
         <div class="edu-year">Graduated: 2018</div>
+        <div class="edu-gpa">GPA: 3.8 / 4.0</div>
         <div class="edu-research">Thesis: Optimization of irrigation scheduling using remote sensing and GIS-based hydrological models.</div>
       </div>
 
@@ -860,7 +902,43 @@
         <div class="edu-school">University of Agriculture, Faisalabad</div>
         <div class="edu-degree">Bachelor of Science in Agricultural Engineering</div>
         <div class="edu-year">Graduated: 2015</div>
+        <div class="edu-gpa">GPA: 3.75 / 4.0</div>
         <div class="edu-research">Focus: Water management, hydraulic structures, and farm machinery.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="certifications">
+  <div class="container">
+    <div class="section-label">Professional Credentials</div>
+    <h2>Certifications &amp; <em>Licenses</em></h2>
+    
+    <div class="cert-grid">
+      <div class="cert-card">
+        <div class="cert-year">2016 — Present</div>
+        <div class="cert-name">Registered Professional Engineer</div>
+        <div class="cert-org">Pakistan Engineering Council (PEC)</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-year">2019 — 2024</div>
+        <div class="cert-name">Professional Engineer License</div>
+        <div class="cert-org">Saudi Council of Engineers (SCE)</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-year">2026 In Progress</div>
+        <div class="cert-name">FE Exam - EIT Certification</div>
+        <div class="cert-org">NCEES (USA Path)</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-year">2024</div>
+        <div class="cert-name">Advanced GIS for Hydrology</div>
+        <div class="cert-org">Environmental Systems Research Institute (ESRI)</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-year">2023</div>
+        <div class="cert-name">Certified Rain Bird Designer</div>
+        <div class="cert-org">Rain Bird Professional Academy</div>
       </div>
     </div>
   </div>
@@ -873,29 +951,32 @@
     <p>Available for engineering opportunities in the Maryland area and remote consultations.</p>
 
     <div class="contact-grid">
-      <div class="contact-card">
+      <a href="mailto:your.email@example.com" class="contact-card">
         <div class="contact-card-icon">📧</div>
         <div class="contact-card-label">Email</div>
         <div class="contact-card-value">your.email@example.com</div>
-      </div>
-      <div class="contact-card">
+      </a>
+
+      <a href="#" class="contact-card">
         <div class="contact-card-icon">💼</div>
         <div class="contact-card-label">LinkedIn</div>
         <div class="contact-card-value">linkedin.com/in/usman-ashraf</div>
-      </div>
+      </a>
+
       <div class="contact-card">
         <div class="contact-card-icon">📞</div>
         <div class="contact-card-label">Phone</div>
         <div class="contact-card-value">+1 (443) 000-0000</div>
       </div>
+
       <div class="contact-card">
         <div class="contact-card-icon">📍</div>
         <div class="contact-card-label">Location</div>
-        <div class="contact-card-value">Baltimore, Maryland, USA</div>
+        <div class="contact-card-value">Baltimore, Maryland 21218, USA</div>
       </div>
     </div>
 
-    <p class="footer-credit">© 2026 M. Usman Ashraf · Water Resources &amp; Irrigation Engineer · All Rights Reserved</p>
+    <p class="footer-credit">© 2025 M. Usman Ashraf, MSc Eng. · Water Resources &amp; Irrigation Engineer · All Rights Reserved</p>
   </div>
 </section>
 
@@ -909,7 +990,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 
-// Scroll-reveal animation
+// Scroll-reveal
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -919,11 +1000,23 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.1 });
 
-document.querySelectorAll('.skill-card, .timeline-item, .edu-card, .cert-card, .contact-card, .portfolio-item').forEach(el => {
+document.querySelectorAll('.skill-card, .timeline-item, .edu-card, .cert-card, .contact-card, .pub-card').forEach(el => {
   el.style.opacity = '0';
   el.style.transform = 'translateY(24px)';
   el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
   observer.observe(el);
+});
+
+// Nav background on scroll
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('navbar');
+  if (window.scrollY > 100) {
+    nav.classList.add('scrolled');
+    document.body.classList.add('nav-scrolled');
+  } else {
+    nav.classList.remove('scrolled');
+    document.body.classList.remove('nav-scrolled');
+  }
 });
 </script>
 
