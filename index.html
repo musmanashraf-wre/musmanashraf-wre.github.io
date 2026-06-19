@@ -1066,44 +1066,52 @@
     <h2>Ready to work <em>together?</em></h2>
     <p>I'm actively seeking Water Resources, Irrigation, Stormwater, or related engineering opportunities in the USA, Canada, Europe and Middle East, and ready to relocate. Let's discuss how I can contribute to your team.</p>
     
-    <div class="contact-grid">
+    <!-- Added inline style to ensure all 5 cards stretch smoothly into 1 single line -->
+    <div class="contact-grid" style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px;">
+      
+      <!-- Phone Card -->
       <a href="tel:+14434131496" class="contact-card">
         <div class="contact-card-icon">📞</div>
         <div class="contact-card-label">Phone</div>
         <div class="contact-card-value">+1 (443) 413-1496</div>
       </a>
 
+      <!-- Email Card -->
       <a href="mailto:m.usman.ashraf12@gmail.com" class="contact-card">
         <div class="contact-card-icon">✉️</div>
         <div class="contact-card-label">Email</div>
         <div class="contact-card-value">m.usman.ashraf12@gmail.com</div>
       </a>
 
+      <!-- LinkedIn Card -->
       <a href="https://www.linkedin.com/in/engr-usman-wre" target="_blank" class="contact-card">
         <div class="contact-card-icon">🔗</div>
         <div class="contact-card-label">LinkedIn</div>
         <div class="contact-card-value">engr-usman-wre</div>
       </a>
 
+      <!-- Google Scholar Card -->
       <a href="https://scholar.google.com/citations?user=6dJOjSMAAAAJ&hl=en" target="_blank" class="contact-card">
         <div class="contact-card-icon">🎓</div>
         <div class="contact-card-label">Google Scholar</div>
         <div class="contact-card-value">Citations & Profile</div>
       </a>
 
+      <!-- Location Card -->
       <div class="contact-card">
         <div class="contact-card-icon">📍</div>
         <div class="contact-card-label">Location</div>
         <div class="contact-card-value">Baltimore, Maryland 21218, USA</div>
       </div>
+
     </div>
   </div>
 </section>
 
-    <!-- Footer credit -->
-    <p class="footer-credit">© 2025 M. Usman Ashraf, MSc Eng. · Water Resources &amp; Irrigation Engineer · All Rights Reserved</p>
-  </div>
-</section>
+<!-- Footer credit (Stray broken section tag removed from here) -->
+<footer style="text-align: center; padding: 24px 0;">
+  <p class="footer-credit">© 2025 M. Usman Ashraf, MSc Eng. · Water Resources &amp; Irrigation Engineer · All Rights Reserved</p>
+</footer>
 
 <script>
 // Smooth scroll for nav links
@@ -1135,8 +1143,9 @@ document.querySelectorAll('.skill-card, .timeline-item, .edu-card, .cert-card, .
 // Nav background on scroll
 window.addEventListener('scroll', () => {
   const nav = document.querySelector('nav');
-  // Already has solid bg, just add shadow
-  nav.style.boxShadow = window.scrollY > 80 ? '0 4px 30px rgba(0,0,0,0.3)' : 'none';
+  if (nav) {
+    nav.style.boxShadow = window.scrollY > 80 ? '0 4px 30px rgba(0,0,0,0.3)' : 'none';
+  }
 });
 </script>
 </body>
